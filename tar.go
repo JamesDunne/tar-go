@@ -91,11 +91,11 @@ func main() {
 				return err
 			}
 
-			outPath := strings.TrimPrefix(path, *stripPrefix + "/")
-			if outPath == "" {
+			if path == *stripPrefix {
 				return nil
 			}
-			if outPath == *stripPrefix {
+			outPath := strings.TrimPrefix(path, *stripPrefix + "/")
+			if outPath == "" {
 				return nil
 			}
 			if outPath == "." || outPath == ".." {
@@ -113,6 +113,7 @@ func main() {
 				return nil
 			}
 
+			fmt.Println(outPath)
 			link := ""
 			if d.Type()&os.ModeSymlink != 0 {
 				link, err = os.Readlink(path)
